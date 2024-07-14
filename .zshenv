@@ -1,3 +1,5 @@
+# zsh 觀念(解決重複路徑)
+# https://gist.github.com/Linerre/f11ad4a6a934dcf01ee8415c9457e7b2
 export HOMEBREW_NO_AUTO_UPDATE=1
 
 # ZDOTDIR 告訴zsh在指定的目錄中尋找並讀取設定檔，使其在當前的shell session和之後的session都可以存取.zshrc。
@@ -21,25 +23,20 @@ setopt SHARE_HISTORY
 export PATH="/opt/bin:$PATH"
 
 # 教學：https://linux.vbird.org/linux_basic/centos7/0340bashshell-scripts.php#script_why
-# 將~/bin路徑加入變數PATH，使得腳本可以再任意路徑下執行。若不加上，則只能在絕對路徑下執行。
+# 將~/dev/bin路徑加入變數PATH，使得腳本可以再任意路徑下執行。若不加上，則只能在絕對路徑下執行。
 # 用法：sh demo.sh 或 bash demo.sh 
-export PATH="~/bin:$PATH"
-
-
+export PATH="~/dev/bin:$PATH"
 
 # .zshrc, etc. are located here
 if [ -z "$INTELLIJ_ENVIRONMENT_READER" ]; then
     export ZDOTDIR=~/.config/zsh
 fi
 
-
 # 已經使用：touch ~/.hushlogin，使得Last Login的提示不再出現。
-
 
 # 不知道以下命令的功能，或許可以刪除？
 # export LDFLAGS="-L/opt/homebrew/opt/llvm/lib"
 # export CPPFLAGS="-I/opt/homebrew/opt/llvm/include"
-# l
 
 # export LDFLAGS="-L/opt/homebrew/opt/SDL2/lib"
 # export CFLAGS="-I/opt/homebrew/opt/SDL2/include"

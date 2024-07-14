@@ -4,6 +4,31 @@
 
 -- TODO: 尚未有任何app全螢幕時，則顯示dock，當有全螢幕時，則自動隱藏dock
 
+-- 來源：https://superuser.com/questions/1606630/toggle-background-opacity-option-in-alacritty
+hs.hotkey.bind({"cmd"}, "u", function()
+  alacritty_file_name = string.format("%s/.config/alacritty/alacritty.toml", os.getenv("HOME"))
+
+  opaque = "opacity = 1"
+  transparent = "opacity = 0.6"
+
+  local file = io.open(alacritty_file_name)
+
+  local content = file:read "*a"
+  file:close()
+
+  if string.match(content, opaque) then
+    content = string.gsub(content, opaque, transparent)
+  else
+    content = string.gsub(content, transparent, opaque)
+  end
+
+  local fileedited = io.open(alacritty_file_name, "w")
+  fileedited:write(content)
+  fileedited:close()
+end)
+
+
+
 d = hs.application("Dock")
 for i=1,9 do
     hs.hotkey.bind({"alt"}, tostring(i), function()

@@ -1,10 +1,13 @@
 export PYDEVD_DISABLE_FILE_VALIDATION=1
 
 export OPENAI_API_KEY='sk-proj-lOIFkkCvWtSmi4CtwSUFT3BlbkFJrrKzjKNZX2rS2OlKGeou'
+
 # 不會在brew install <package> 時自動更新所有套件
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-export BAT_CONFIG_PATH="/Users/dah/.config/bat/config"
+# 已經 brew uninstall bat 用不到了
+# export BAT_CONFIG_PATH="/Users/dah/.config/bat/config"
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -33,12 +36,13 @@ export C_INCLUDE_PATH=/opt/homebrew/include/SDL2:$C_INCLUDE_PATH
 # 找不到就去系統路徑
 export LIBRARY_PATH=/opt/homebrew/lib:$LIBRARY_PATH
 
-# 效果: 可在命令行中直接運行llvm相關的工具，如clang、clang++ 等，而不必輸入完整的路徑(預設是/usr/bin/clang會先被使用)
+# 效果: 可在命令行中直接運行llvm相關的工具，如clang、clang++ 等，
+# 而不必輸入完整的路徑(預設是/usr/bin/clang會先被使用)
 # Jdh是只在.zshenv中設定，但我必須要在.zshrc才行
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
 # 避免tldr自動更新。
-export TLDR_AUTO_UPDATE_DISABLED
+export TLDR_AUTO_UPDATE_DISABLED=true
 
 alias nvim=~/Downloads/nvim0.9.5/bin/nvim
 # alias nvim=~/Downloads/nvim0.10.0/nvim-macos-arm64/bin/nvim
@@ -46,14 +50,16 @@ alias nvim=~/Downloads/nvim0.9.5/bin/nvim
 # homebrew in path
 eval $(/opt/homebrew/bin/brew shellenv)
 
-# # 每次打開終端機時，立刻進入tmux
-if [ -z "$TMUX" ]; then # -z 意思為zero length。-z "$TMUX" 檢查 $TMUX 是否為空字串。
+# 每次打開終端機時，立刻進入tmux
+# -z 意思為zero length。-z "$TMUX" 檢查 $TMUX 是否為空字串。
+if [ -z "$TMUX" ]; then 
   # exec arch -arm64 tmux
-  tmux
+  tmux 
 fi
 
+# 已經 brew uninstall bat 用不到了
 # match terminal
-export BAT_THEME=gruvbox-dark
+# export BAT_THEME=gruvbox-dark
 
 # Path to your oh-my-zsh installation.
 export ZSH="$ZDOTDIR/ohmyzsh"
@@ -71,11 +77,15 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="geoffgarside" # set by `omz`
 
+# The incantation typeset -U path, where the -U stands for unique,
+# tells the shell that it should not add anything to $path if it's
+# there already.
+typeset -U path
+
 # if type rg &> /dev/null; then
 #   export FZF_DEFAULT_COMMAND='rg --files'
 #   export FZF_DEFAULT_OPTS='-m --height 50% --border'
 # fi
-
 
 # ~/.fzf.zsh: 这一行检查是否存在文件 ~/.fzf.zsh，如果存在则执行 source 命令，即加载 ~/.fzf.zsh 文件。这可以用来进一步配置或扩展 fzf 的功能。
 # [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -173,4 +183,3 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-

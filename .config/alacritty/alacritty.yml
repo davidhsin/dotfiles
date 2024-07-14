@@ -20,6 +20,7 @@ font:
     # Font family
     #
     # Default:
+
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas

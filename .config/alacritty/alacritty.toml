@@ -47,6 +47,7 @@ style = "Medium"
 [window]
 dynamic_title = true
 title = "Terminal"
+opacity = 1 # default 1.0
 
 # [[keyboard.bindings]]
 # chars = "\u001BF"
