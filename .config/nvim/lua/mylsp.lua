@@ -6,8 +6,7 @@ vim.api.nvim_set_keymap('n', 'ge', '<cmd>lua vim.diagnostic.goto_prev()<CR>', op
 vim.api.nvim_set_keymap('n', 'gE', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
 vim.api.nvim_set_keymap('n', ',q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 
-
-local dap = require("dap")
+-- local dap = require("dap")
 
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
@@ -33,13 +32,12 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', ',f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
 
   -- python debugging mappings
-  vim.api.nvim_set_keymap('n', ';db', '<cmd>DapToggleBreakpoint<CR>', opts)
-  vim.api.nvim_set_keymap('n', ';dt', '<cmd>lua require("dap-python").test_method()<CR>', opts)
-  vim.api.nvim_set_keymap('n', ';t', '<cmd>lua require("dapui").toggle()<CR>', opts)
-  vim.api.nvim_set_keymap('n', ';c', '<cmd>lua require("dapui").close()<CR>', opts)
-  vim.keymap.set('n', ';dc', dap.continue, opts)
+  -- vim.api.nvim_set_keymap('n', ';db', '<cmd>DapToggleBreakpoint<CR>', opts)
+  -- vim.api.nvim_set_keymap('n', ';dtm', '<cmd>lua require("dap-python").test_method()<CR>', opts)
+  -- vim.api.nvim_set_keymap('n', ';t', '<cmd>lua require("dapui").toggle()<CR>', opts)
+  -- vim.api.nvim_set_keymap('n', ';c', '<cmd>lua require("dapui").close()<CR>', opts)
+  -- vim.keymap.set('n', ';dc', dap.continue, opts)
 end
-
 
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -59,35 +57,24 @@ require('lspconfig').clangd.setup{
     "--pretty",
     "--header-insertion=never",
     "-j=4",
-    "--inlay-hints",
+    -- "--inlay-hints",
     "--header-insertion-decorators",
     "--function-arg-placeholders",
     "--completion-style=detailed",
   },
   filetypes = {"c", "cpp", "objc", "objcpp"},
   root_dir = require('lspconfig').util.root_pattern("src"),
-  init_option = { fallbackFlags = {  "-std=c++2a"  } },
+  -- init_options = { fallbackFlags = { "--std=c++2a" } }, -- use it or use .clangd
   capabilities = capabilities
 }
+-- touch .clangd on workspace dir to avoid annoying errors form clangd:
+-- CompileFlags: 
+--   Add: [ "-std=c++20" ]  # 添加 C++20 標準的編譯選項
+--   Compiler: "clang++"    # 使用 clang++ 作為編譯器
+
 
 require('lspconfig').pyright.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   cmd = { "/Users/dah/.local/share/nvim/mason/bin/pyright-langserver", "--stdio" }
 }
-
--- require('lspconfig').zls.setup {
---   on_attach = on_attach,
---   capabilities = capabilities,
---   cmd = {
---     "zls",
---     "--enable-debug-log",
---   },
--- }
-
--- require("lspconfig").nimls.setup{
---     cmd                 = {"nimlsp"},
---     filetypes           = {"nim"},
---     single_file_support = true
--- }
-

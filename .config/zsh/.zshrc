@@ -1,22 +1,31 @@
+export LDFLAGS="-L/opt/homebrew/opt/binutils/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/binutils/include"
+
+export CPLUS_INCLUDE_PATH=/opt/homebrew/Cellar/open-mpi/5.0.3_1/include:$C_INCLUDE_PATH  
+
 export PYDEVD_DISABLE_FILE_VALIDATION=1
 
-export OPENAI_API_KEY='sk-proj-lOIFkkCvWtSmi4CtwSUFT3BlbkFJrrKzjKNZX2rS2OlKGeou'
+export OPENAI_API_KEY='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'
+
+export PROJECT_ID='proj_qDZWYICOp5aJYRwYA6Xbq3gK'
 
 # 不會在brew install <package> 時自動更新所有套件
 export HOMEBREW_NO_AUTO_UPDATE=1
 
-# 已經 brew uninstall bat 用不到了
-# export BAT_CONFIG_PATH="/Users/dah/.config/bat/config"
+# homebrew in path
+eval $(/opt/homebrew/bin/brew shellenv)
+
+# 避免tldr自動更新。
+export TLDR_AUTO_UPDATE_DISABLED=true
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # LD_LIBRARY_PATH: 
 # 一個環境變量，用於指定運行時動態鏈接器在哪些目錄中搜索共享庫。
-# 共享庫是一種可執行代碼的形式，它可以被多個程序共享，
-# 以減少內存佔用和提高代碼重用性。
-# 將llvm函式庫的路徑加到LD_LIBRARY_PATH，以便程式運行期間能加載
-# 和使用llvm相關的函式庫，這動作叫做“動態連結”
+# 共享庫是一種可執行代碼的形式，它可以被多個程序共享，以減少內存
+# 佔用和提高代碼重用性。將llvm函式庫的路徑加到LD_LIBRARY_PATH，以
+# 便程式運行期間能加載和使用llvm相關的函式庫，這動作叫做“動態連結”
 # export LD_LIBRARY_PATH="/opt/homebrew/opt/llvm/lib:$LD_LIBRARY_PATH"
 
 # export LDFLAGS="-L/opt/homebrew/opt/SDL2/lib"
@@ -24,77 +33,54 @@ export HOMEBREW_NO_AUTO_UPDATE=1
 
 # 參考資料：https://ixyzero.com/blog/archives/2840.html
 # 解決clangd #include <SDL.h> 'SDL.h' file not found
-# 且使得編譯命令不需加上-I/opt/homebrew/include/SDL2
-export CPLUS_INCLUDE_PATH=/opt/homebrew/include/SDL2:$CPLUS_INCLUDE_PATH     
-export C_INCLUDE_PATH=/opt/homebrew/include/SDL2:$C_INCLUDE_PATH             
+# 使得LSP不報錯且編譯命令不需加上-I/opt/homebrew/include/SDL2
+# 也可將C_INCLUDE_PATH改成include結尾，去掉SDL2。  
+export C_INCLUDE_PATH=/opt/homebrew/include/SDL2:$C_INCLUDEPATH             
+export C_INCLUDE_PATH=/opt/homebrew/Cellar/glfw/3.4/include/:$C_INCLUDE_PATH
+export C_INCLUDE_PATH=/Users/dah/Learning/openGL/glad/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=/Users/dah/Learning/openGL/glad/include:$CPLUS_INCLUDE_PATH
 
-# 若改成 = .../incldue 去掉SDL2呢？  
 # export C_INCLUDE_PATH=/opt/homebrew/include/:$C_INCLUDE_PATH             
+# export CPLUS_INCLUDE_PATH=/opt/homebrew/include/SDL2:$CPLUS_INCLUDE_PATH     
 
 # 使得編譯命令不需加上 -L/opt/homebrew/lib
 # 將該路徑設定至環境變數，使得作業系統會先去指定路徑底下找，
 # 找不到就去系統路徑
 export LIBRARY_PATH=/opt/homebrew/lib:$LIBRARY_PATH
 
+export LIBRARY_PATH=/opt/homebrew/Cellar/glfw/3.4/lib:$LIBRARY_PATH
+
+
+
 # 效果: 可在命令行中直接運行llvm相關的工具，如clang、clang++ 等，
 # 而不必輸入完整的路徑(預設是/usr/bin/clang會先被使用)
-# Jdh是只在.zshenv中設定，但我必須要在.zshrc才行
+# jdh是只在.zshenv中設定，但我必須要在.zshrc才行
 export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
 
-# 避免tldr自動更新。
-export TLDR_AUTO_UPDATE_DISABLED=true
+# alias nvim=~/Downloads/nvim0.9.5/bin/nvim
+# alias nvim=/Users/dah/Documents/nvim-macos/bin/nvim
 
-alias nvim=~/Downloads/nvim0.9.5/bin/nvim
-# alias nvim=~/Downloads/nvim0.10.0/nvim-macos-arm64/bin/nvim
-
-# homebrew in path
-eval $(/opt/homebrew/bin/brew shellenv)
-
-# 每次打開終端機時，立刻進入tmux
 # -z 意思為zero length。-z "$TMUX" 檢查 $TMUX 是否為空字串。
 if [ -z "$TMUX" ]; then 
   # exec arch -arm64 tmux
   tmux 
 fi
 
-# 已經 brew uninstall bat 用不到了
-# match terminal
-# export BAT_THEME=gruvbox-dark
+# You may need to manually set your language environment
+export LANG=en_US.UTF-8
 
 # Path to your oh-my-zsh installation.
 export ZSH="$ZDOTDIR/ohmyzsh"
 
-# You may need to manually set your language environment
-export LANG=en_US.UTF-8
-
 # zsh-autosuggest config
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#666666"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_THEME="geoffgarside"
 
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="geoffgarside" # set by `omz`
-
-# The incantation typeset -U path, where the -U stands for unique,
-# tells the shell that it should not add anything to $path if it's
-# there already.
-typeset -U path
-
-# if type rg &> /dev/null; then
-#   export FZF_DEFAULT_COMMAND='rg --files'
-#   export FZF_DEFAULT_OPTS='-m --height 50% --border'
-# fi
-
-# ~/.fzf.zsh: 这一行检查是否存在文件 ~/.fzf.zsh，如果存在则执行 source 命令，即加载 ~/.fzf.zsh 文件。这可以用来进一步配置或扩展 fzf 的功能。
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+if type rg &> /dev/null; then
+  export FZF_DEFAULT_COMMAND='rg --files'
+  export FZF_DEFAULT_OPTS='-m --height 50% --border'
+fi
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -158,19 +144,16 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+# zsh 觀念(解決重複路徑)
+# https://gist.github.com/Linerre/f11ad4a6a934dcf01ee8415c9457e7b2
+# The incantation typeset -U path, where the -U stands for unique,
+# tells the shell that it should not add anything to $path if it's
+# there already.
+typeset -U path
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -179,7 +162,8 @@ source $ZSH/oh-my-zsh.sh
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
 # For a full list of active aliases, run `alias`.
-#
+
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export PATH="/opt/homebrew/opt/binutils/bin:$PATH"

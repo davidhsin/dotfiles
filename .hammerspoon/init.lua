@@ -27,8 +27,6 @@ hs.hotkey.bind({"cmd"}, "u", function()
   fileedited:close()
 end)
 
-
-
 d = hs.application("Dock")
 for i=1,9 do
     hs.hotkey.bind({"alt"}, tostring(i), function()
@@ -99,14 +97,18 @@ end)
 
 -- 更改快捷鍵，將cmd + Right改成cmd + h
 -- 註：cmd + Right 跳至句首 
+-- July 25 改成 backward one word
 hs.hotkey.bind({"cmd"}, "H", function()
-    hs.eventtap.keyStroke({"cmd"}, "Left")
+    -- hs.eventtap.keyStroke({"cmd"}, "Left")
+    hs.eventtap.keyStroke({"alt"}, "Left")
 end)
 
 -- 更改快捷鍵，將cmd + Left改成cmd + L 
 -- 註：cmd + Left 跳至句尾 
+-- July 25 改成 forward one word
 hs.hotkey.bind({"cmd"}, "L", function()
-    hs.eventtap.keyStroke({"cmd"}, "Right")
+    -- hs.eventtap.keyStroke({"cmd"}, "Right")
+    hs.eventtap.keyStroke({"alt"}, "Right")
 end)
 
 hs.hotkey.bind('ctrl', 's', function()
@@ -179,17 +181,9 @@ hs.hotkey.bind("alt", "Up", FullScreen)
 --     end)
 -- end
 
-
-
-
-
 -- axuielement means Accessibility User Interface Element (存取使用者互動元素)
 -- 这些元素是通过辅助功能接口让辅助工具、自动化脚本和屏幕阅读器等工具能够与应用程序和用户界面进行交互的方式。
 -- 使用hs.axuielement函數獲取Dock應用程式的UI元素，並選擇指定索引的圖標（iconNumber）。Dock的UI元素可以被看作是一個列表，索引從1開始，表示Dock中的第一個應用程式圖標。
-
-
-
-
 
 -- 原本的code
 -- https://github.com/Hammerspoonhammerspoon/issues/953
@@ -206,12 +200,6 @@ hs.hotkey.bind("alt", "Up", FullScreen)
 --     end)
 -- end
 
-
-
-
-
-
-
 function dragWindow()
     local win = hs.window.focusedWindow()
     local f = win:frame()
@@ -220,6 +208,3 @@ function dragWindow()
     f.y = mouse.y - (f.h / 2)
     win:setFrame(f)
 end
-
-
-
