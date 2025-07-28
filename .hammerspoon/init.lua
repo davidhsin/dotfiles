@@ -1,8 +1,6 @@
--- alt means option
--- cmd means command
--- ctrl means control
-
--- TODO: 尚未有任何app全螢幕時，則顯示dock，當有全螢幕時，則自動隱藏dock
+-- alt = option
+-- cmd = command
+-- ctrl = control
 
 -- 來源：https://superuser.com/questions/1606630/toggle-background-opacity-option-in-alacritty
 hs.hotkey.bind({"cmd"}, "u", function()
@@ -95,6 +93,11 @@ hs.hotkey.bind({"alt"}, "`", function()
     hs.eventtap.keyStroke({"alt", "cmd"}, "D")
 end)
 
+-- test fullscreen (do not work :(  )
+hs.hotkey.bind("ctrl", "f", function()
+	hs.eventtap.keyStroke({"ctrl", "cmd"}, "F")
+end)
+
 -- 更改快捷鍵，將cmd + Right改成cmd + h
 -- 註：cmd + Right 跳至句首 
 -- July 25 改成 backward one word
@@ -112,7 +115,7 @@ hs.hotkey.bind({"cmd"}, "L", function()
 end)
 
 hs.hotkey.bind('ctrl', 's', function()
-    hs.alert.show("•ࡇ•  電量：" .. hs.battery.percentage() .. "%")
+    hs.alert.show("•ࡇ•  Poewr: " .. hs.battery.percentage() .. "%")
     -- hs.alert.show(' •ࡇ•')
     -- app = hs.application.frontmostApplication()
     -- hs.alert.show(app:name()) --顯示當前app的名稱

@@ -1,0 +1,38 @@
+<!-- put it here: ~/Library/LaunchAgents -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- 定義服務的名稱 -->
+	<key>Label</key>
+	<string>com.local.KeyRemapping</string>
+
+    <!-- 設定要執行的指令與參數 -->
+	<key>ProgramArguments</key>
+	<array>
+		<!-- 執行 macOS 原生的 hidutil 工具，用於管理 HID（人機介面設備）屬性 -->
+		<string>/usr/bin/hidutil</string>
+		<string>property</string>
+		<string>--set</string>
+		<string>{"UserKeyMapping": [
+			{
+				"HIDKeyboardModifierMappingSrc": 0x70000003A, 
+				"HIDKeyboardModifierMappingDst": 0xFF00000009
+			},
+			{
+				"HIDKeyboardModifierMappingSrc": 0x70000003B, 
+				"HIDKeyboardModifierMappingDst": 0xFF00000008
+			}
+		]}</string>
+	</array>
+	<key>RunAtLoad</key>
+	<true/>
+</dict>
+</plist>
+
+<!-- HIDKeyboardModifierMappingSrc：來源鍵碼。 -->
+<!-- 0x70000003A 表示來源按鍵是 Caps Lock。 -->
+<!-- 0x70000003B 表示來源按鍵是 Control (左)。 -->
+<!-- HIDKeyboardModifierMappingDst：目標鍵碼。 -->
+<!-- 0xFF00000009 表示目標是 Escape (Esc)。 -->
+<!-- 0xFF00000008 表示目標是 Command (左)。 -->
