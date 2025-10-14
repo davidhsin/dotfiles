@@ -5,8 +5,6 @@ export CPLUS_INCLUDE_PATH=/opt/homebrew/Cellar/open-mpi/5.0.3_1/include:$C_INCLU
 
 export PYDEVD_DISABLE_FILE_VALIDATION=1
 
-export OPENAI_API_KEY='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'
-
 export PROJECT_ID='proj_qDZWYICOp5aJYRwYA6Xbq3gK'
 
 # 不會在brew install <package> 時自動更新所有套件
