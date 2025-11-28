@@ -24,10 +24,9 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-" 自動縮排對齊間隔數：向右或向左一個縮排的寬度
-set shiftwidth=4
-set tabstop=4
-set smartindent " 改善 } 格式跑掉測試。
+set tabstop=2      " 一個 Tab 顯示寬度為 N 格
+set shiftwidth=2   " << 或 >> 每次縮排 N 格
+set expandtab      " 將 Tab 鍵自動轉成空格
 
 set t_Co=256
 set termguicolors  " Can switch to notermguicolors
