@@ -1,22 +1,33 @@
 {
     "editor.accessibilitySupport": "off",
-    "cmake.showOptionsMovedNotification": false,
     "security.workspace.trust.untrustedFiles": "open",
     "workbench.colorCustomizations": {
         "sideBar.background": "#181818",
         "titleBar.activeBackground": "#181818",
         "activityBar.background": "#181818",
         "editor.background": "#1E1E1E",
-        "editorGroupHeader.tabsBackground": "#181818" // 202020
+        "editorGroupHeader.tabsBackground": "#181818", // 202020
+        "editorRuler.foreground": "#7c6f64",
+        // "terminal.background": "#181818", // for gruvbox thmme
     },
     "window.zoomLevel": 1,
     "editor.mouseWheelZoom": true,
     "terminal.integrated.mouseWheelZoom": true,
     "workbench.startupEditor": "none",
     "editor.fontFamily": "Roboto Mono",
+    "editor.lineNumbers": "on",
+    "notebook.lineNumbers": "on",
+    "terminal.integrated.enablePersistentSessions": true, // 之前設定 fasle
+    "terminal.integrated.stickyScroll.enabled": false,
+    "workbench.colorTheme": "Default Dark+",
+    "editor.minimap.enabled": false,
+    "chat.agent.enabled": false,
 
-    "vim.commandLineModeKeyBindings": [],
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+
     "vim.leader": ",",
+    "vim.commandLineModeKeyBindings": [],
     "vim.normalModeKeyBindings": [
         {
             "before": ["r"],
@@ -119,27 +130,14 @@
         }
     ],
 
-    "markdown.extension.completion.enabled": true,
-    "markdown.extension.list.toggle.candidate-markers": [
-        "-",
-        "*",
-        "+",
-        "1.",
-        "1)"
-    ],
-    "markdown.extension.katex.macros": {
-        "\\intsum": "\\int_{#1}^{#2} #3 \\; d#4", 
-        "\\RR": "\\mathbb{R}",
-        "\\vec": "\\mathbf{#1}",
-        "\\f": "#1f(#2)",
-        "\\lim": "\\lim_{#1 \\to #2} #3",
-        "\\l'Hôpital": "\\lim_{x \\to #1} \\frac{f(x)}{g(x)} \\text{ (使用 l'Hôpital's 法則)}",
-        "\\epsilon": "\\forall \\epsilon > 0, \\exists \\delta > 0: |x - #1| < \\delta \\Rightarrow |f(x) - f(#1)| < \\epsilon",
-        "\\C": "\\lim_{x \\to c} f(x) = L \\text{ 表示 } f(x) \\text{ 在 } x = c \\text{ 處的極限為 } L",
-        "\\inf": "\\lim_{n \\to \\infty} a_n \\text{ 的下界 }",
-        "\\sup": "\\lim_{n \\to \\infty} a_n \\text{ 的上界 }"
-    },
-    "editor.lineNumbers": "on",
-    "notebook.lineNumbers": "on",
-    "workbench.colorTheme": "Default Dark+",
+    "multiCommand.commands": [
+        {
+            "command": "multiCommand.openQuickOpenHorizontal",
+            "sequence": [
+                "workbench.action.acceptSelectedQuickOpenItem",
+                "workbench.action.moveEditorToBelowGroup",
+                "workbench.action.focusBelowGroup"
+            ]
+        }
+    ]
 }
